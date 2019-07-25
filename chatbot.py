@@ -23,12 +23,12 @@ def main():
                        help='number of characters to sample')
     parser.add_argument('--prime', type=str, default=' ',
                        help='prime text')
-    parser.add_argument('--beam_width', type=int, default=2,
+    parser.add_argument('--beam_width', type=int, default=2, # check 1
                        help='Width of the beam for beam search, default 2')
     parser.add_argument('--temperature', type=float, default=1.0,
                        help='sampling temperature'
                        '(lower is more conservative, default is 1.0, which is neutral)')
-    parser.add_argument('--topn', type=int, default=-1,
+    parser.add_argument('--topn', type=int, default=-1, #1
                         help='at each step, choose from only this many most likely characters;'
                         'set to <0 to disable top-n filtering.')
     parser.add_argument('--relevance', type=float, default=-1.,
@@ -80,6 +80,7 @@ def sample_main(args):
         # Restore the saved variables, replacing the initialized values.
         print("Restoring weights...")
         saver.restore(sess, model_path)
+        print(vocab)
         chatbot(net, sess, chars, vocab, args.n, args.beam_width,
                 args.relevance, args.temperature, args.topn)
 

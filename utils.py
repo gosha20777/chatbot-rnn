@@ -85,7 +85,7 @@ class TextLoader():
         return sorted(input_file_list)
 
     def _save_vocab(self, vocab_file):
-        self.chars = [chr(i) for i in range(128)]
+        self.chars = [chr(i) for i in range(1104)]
         self.vocab_size = len(self.chars)
         self.vocab = dict(zip(self.chars, range(len(self.chars))))
         with open(vocab_file, 'wb') as f:
@@ -102,8 +102,8 @@ class TextLoader():
         self.vocab = dict(zip(self.chars, range(len(self.chars))))
 
     def _preprocess(self, input_file, tensor_file):
-        if input_file.endswith(".bz2"): file_reference = bz2.open(input_file, mode='rt')
-        elif input_file.endswith(".txt"): file_reference = io.open(input_file, mode='rt')
+        if input_file.endswith(".bz2"): file_reference = bz2.open(input_file, mode='rt',encoding='utf-8')
+        elif input_file.endswith(".txt"): file_reference = io.open(input_file, mode='rt',encoding='utf-8')
         data = file_reference.read()
         file_reference.close()
         # Convert the entirety of the data file from characters to indices via the vocab dictionary.
